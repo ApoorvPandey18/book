@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Message by Rohan</title>
+     <style>
+      * {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background-image: radial-gradient(
+      circle farthest-corner at 50% 50%,
+      hsl(187 20% 88%) 30%,
+      hsl(149 20% 94%) 100%
+  );
+}
+
+.book {
+  position: relative;
+  display: flex;
+  margin: auto;
+  width: 42cqmin; /* Increased width */
+  pointer-events: none;
+  transform-style: preserve-3d;
+  transition: translate 1s;
+  translate: calc(min(var(--c), 1) * 50%) 0%;
+  rotate: 1 0 0 30deg;
+}
+
+.page {
+  --thickness: 4;
+  flex: none;
+  display: flex;
+  width: 100%;
+  font-size: 2.2cqmin; /* Slightly increased font size */
+  pointer-events: all;
+  user-select: none;
+  transform-style: preserve-3d;
+  transform-origin: left center;
+  transition: transform 1s,
+      rotate 1s ease-in calc((min(var(--i), var(--c)) - max(var(--i), var(--c))) * 50ms);
+  translate: calc(var(--i) * -100%) 0px 0px;
+  transform: translateZ(calc((var(--c) - var(--i) - 0.5) * calc(var(--thickness) * 0.23cqmin)));
+  rotate: 0 1 0 calc(clamp(0, var(--c) - var(--i), 1) * -180deg);
+}
+
+.front,
+.back {
+  position: relative;
+  flex: none;
+  width: 100%;
+  backface-visibility: hidden;
+  overflow: hidden;
+  background-color: #fff;
+  translate: 0px;
+}
+
+.back {
+  translate: -100% 0;
+  rotate: 0 1 0 180deg;
+}
+
+.book {
+  counter-reset: page -1;
+}
+
+.book a {
+  color: inherit;
+}
+
+.page {
+  box-shadow: 0em 0.5em 1em -0.2em #00000020;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: space-between;
+  padding: 2em;
+  border: 1px solid #0002;
+}
+
+.front:has(img),
+.back:has(img) {
+  padding: 0;
+}
+
+.front img,
+.back img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.front::after,
+.back::after {
+  position: absolute;
+  bottom: 1em;
+  counter-increment: page;
+  content: counter(page) ".";
+  font-size: 0.8em;
+}
+
+.cover::after {
+  content: "";
+}
+
+.front::after {
+  right: 1em;
+}
+
+.front {
+  background: linear-gradient(to left, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.1em 0.5em 0.5em 0.1em;
+}
+
+.back::after {
+  left: 1em;
+}
+
+.back {
+  background-image: linear-gradient(to right, #f7f7f7 80%, #eee 100%);
+  border-radius: 0.5em 0.1em 0.1em 0.5em;
+}
+
+.cover {
+  background: radial-gradient(
+          circle farthest-corner at 80% 20%,
+          hsl(150 80% 20% / 0.3) 0%,
+          hsl(170 60% 10% / 0.1) 100%
+      ),
+      hsl(231, 32%, 29%) url("./cover.jpg") 50% / cover;
+  color: hsl(0, 100%, 30%); /* Dark red text color for cover page */
+}
+
+h1,
+h2,
+h3 {
+  margin-bottom: 1px;
+  color: hsl(0, 100%, 30%); /* Dark red heading color */
+}
+
+p {
+  margin-top: 1px;
+  margin-bottom: 8px;
+  line-height: 1.4;
+  color: hsl(0, 100%, 30%); /* Dark red text color for paragraphs */
+}
+
+.front,
+.back {
+  padding: 1.5em;
+  color: hsl(0, 100%, 30%); /* Dark red text color for front and back pages */
+}
+
+.book {
+  width: 40cqmin; /* Slightly increased width */
+}
+
+.page {
+  font-size: 2cqmin; /* Slightly increased font size */
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+.front,
+.back {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 1.5em;
+}
+
+h2 {
+  margin-bottom: 5px;
+}
+
+p {
+  margin-top: 5px;
+  line-height: 1.4;
+}
+
+
+body {
+  margin: 0;
+  display: flex;
+  min-height: 100dvh;
+  perspective: 1000px;
+  font: 1em/1.4 "Poppins", sans-serif;
+  overflow: hidden;
+  color: hsl(180 68% 5%);
+  background: linear-gradient(to right, #ff7eb9, #ff65a3, #ff165d);
+  background-size: 400% 400%;
+  animation: gradientAnimation 10s ease infinite;
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Emoji Animation */
+.emoji {
+  position: absolute;
+  font-size: 3rem;
+  opacity: 0;
+  animation: floatEmojis 6s ease-in-out infinite;
+}
+
+@keyframes floatEmojis {
+  0% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-100px) rotate(20deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(100px);
+    opacity: 1;
+  }
+}
+
+/* Add random timing for each emoji */
+.emoji:nth-child(1) {
+  animation-delay: 0s;
+  left: 10%;
+}
+.emoji:nth-child(2) {
+  animation-delay: 1s;
+  left: 20%;
+}
+.emoji:nth-child(3) {
+  animation-delay: 2s;
+  left: 30%;
+}
+.emoji:nth-child(4) {
+  animation-delay: 3s;
+  left: 40%;
+}
+.emoji:nth-child(5) {
+  animation-delay: 4s;
+  left: 50%;
+}
+.emoji:nth-child(6) {
+  animation-delay: 5s;
+  left: 60%;
+}
+.emoji:nth-child(7) {
+  animation-delay: 6s;
+  left: 70%;
+}
+.emoji:nth-child(8) {
+  animation-delay: 7s;
+  left: 80%;
+}
+.emoji:nth-child(9) {
+  animation-delay: 8s;
+  left: 90%;
+}
+
+
+     </style>
+  </head>
+  <body>
+    <div class="book">
+      <div class="page">
+        <div class="front cover">
+          <h1
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            A Message for You🤍
+          </h1>
+
+          <p
+            style="
+              color: rgb(255, 255, 255);
+              text-shadow: 5px 2px 5px rgb(0, 0, 0);
+            "
+          >
+            2025.<br />Rohan Pandey Special Edition
+          </p>
+        </div>
+        <div class="back">
+          <h2>A Special Beginning ❤️✨</h2>
+
+       <p>Some people come into our lives unexpectedly, yet leave a lasting impact. You are one of those rare souls who make every moment feel a little more special.
+
+        From the very first conversation, something about you stood out—your kindness, your charm, and the effortless way you make the world around you brighter.
+        
+        This isn’t just a collection of words; it’s a small way of showing how much you mean to me. A way to remind you that you are appreciated, admired, and truly special.
+        
+        So, here’s to us—our conversations, our connection, and the beautiful moments yet to come. 💖</p>
+
+          
+        </div>
+      </div>
+      <!--2nd page-->
+      <div class="page">
+        <div class="front">
+          <h2>From Strangers to Something Special ❤️✨</h2>
+          <p>
+            It’s incredible to think how, just a few days ago, I didn’t even know you. Meeting you through [platform] was a moment of fate that I’ll always be grateful for.
+
+At first, I wasn’t sure how we’d connect, what we’d talk about, or what kind of person you’d be. But now, after spending time with you, I’ve realized something truly special—
+
+You’re absolutely amazing. 💖
+
+Your words, your kindness, and the way you make me smile have already made a place in my heart. I never expected to meet someone like you, but now, I can’t imagine not having you in my life.
+
+Maybe it was destiny, or maybe it was just luck—but whatever it was, I’m glad it brought me to you. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="data:image/jpeg;base64,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" alt="Img 1" />
+          
+        </div>
+      </div>
+      <!--3rd page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Magic of You ✨💖</h2>
+          <p>
+            There’s a charm about you, a beauty that words can hardly capture. It’s in the sparkle of your eyes, the warmth of your smile, and the effortless way you light up every moment. Every little thing about you feels so perfect, so mesmerizing, that I often wonder—
+
+            Were you crafted as a masterpiece?
+            
+            It’s as if the universe took its time, carefully shaping someone as wonderful as you, just to make the world a little brighter. And trust me, you do. Every single day. 💕
+            
+            Your presence feels like a soft melody, soothing yet unforgettable. The way you carry yourself, the kindness in your heart, and the purity in your soul make you even more special. It’s not just about how beautiful you look—it’s about how beautiful you truly are.
+            
+            Every time I see you, I’m reminded that some things in life are simply magical, and you, without a doubt, are one of them. ✨💖
+          </p>
+        </div>
+        <div class="back">
+          <h2>The Strength Within You 💫✨</h2>
+          <p>
+            Beyond your beauty, what truly stands out is your dedication, hard work, and passion. You’re not just someone to admire for how you look—you’re an inspiration. The way you stay focused, chase your dreams, and give your best in everything makes me respect you even more.
+
+You are a true leader.
+
+Your confidence, kindness, and strength set you apart. You don’t just follow a path—you create one. Seeing your determination reminds me that true beauty isn’t just about appearance, but about the fire within you. And that’s what makes you truly incredible. 💖✨
+
+No challenge is too big for you, and no goal is out of reach. You inspire those around you to be better, to dream bigger, and to believe in themselves. Watching you grow and achieve so much makes me proud to know you. 🌟
+          </p>
+        </div>
+      </div>
+      <!--4th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Best Part of My Day🤞💖</h2>
+          <p>
+            Talking to you has quickly become one of the highlights of my day. Every time I see a message from you, I can’t help but smile—it’s like a little spark of happiness. No matter how my day is going, our conversations make everything feel lighter and brighter.
+
+            You have a way of making the simplest moments special.
+            
+            It’s not just about how beautiful you are; it’s the warmth, kindness, and charm in the way you talk. Your words have a magic that makes me feel at ease, and your presence alone brings joy.
+            
+            I never knew a conversation could mean so much, but with you, it does. 💕
+          </p>
+        </div>
+        <div class="back">
+          <img src="data:image/jpeg;base64,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" alt="Img 1" />
+        </div>
+      </div>
+      <!--5th page-->
+      <div class="page">
+        <div class="front">
+          <h1>A Wish from the Heart 💫💖</h1>
+          <p>
+            Sometimes, I find myself wishing I could meet you in person, just to see the smile that brightens my day and hear the voice that makes everything feel lighter. Maybe it’s a long shot, but the thought still lingers.
+
+            Even though we’ve only known each other for a short time, I hope you won’t forget me. Our moments, our conversations—they mean more to me than you might realize.
+            
+            No matter what happens, I truly wish you a life filled with happiness, peace, and everything you deserve. 💕
+            
+            You are someone special, and I hope life gives you endless reasons to smile. No matter where we go from here, I’ll always be grateful for the time we’ve shared. And if fate ever allows, maybe one day our paths will cross for real. ✨
+          </p>
+        </div>
+        <div class="back">
+          <h1>Always Here for You 💖✨</h1>
+          <p>
+            You are an inspiration, and I want you to know that I’ll always be here for you, no matter what. If you ever need anything—someone to listen, someone to support you, or just someone to make you smile—I’m just a message away.
+
+            My time is yours whenever you need it.
+            
+            Life can be unpredictable, but I hope you never feel alone. Whether it’s a good day or a tough one, I’ll always be here to cheer you on, to remind you how amazing you are.
+            
+            You deserve nothing but happiness, and if I can be a small part of that, I’d be honored. No matter where life takes us, just know that you’ll always have someone who cares—someone who truly believes in you. 💕
+          </p>
+        </div>
+      </div>
+      <!--6th page-->
+      <div class="page">
+        <div class="front">
+          <h2>The Beauty of You ✨💖</h2>
+          <p>
+            Can we take a moment to appreciate how effortlessly stunning you look in anything you wear? It’s not just the clothes—it’s the confidence, the grace, and the way you carry yourself that make you truly unforgettable.
+
+            You have a presence that turns heads and a charm that captivates hearts.
+            
+            There’s something about you that draws people in—maybe it’s your elegance, your warmth, or just the way you light up any room you walk into. Whatever it is, it’s undeniable, and it makes you absolutely perfect in every way.
+            
+            But beyond your beauty, it’s your kindness and the way you make others feel special that truly set you apart. You radiate positivity, and your energy is something rare and precious.
+            
+            No matter where you are or what you do, you leave a lasting impression. You are not just beautiful—you are extraordinary. 💖✨
+          </p>
+        </div>
+        <div class="back">
+          <h2>Absolutely Breathtaking ✨💖</h2>
+          <p>
+            In everything you wear, you are nothing short of breathtaking. It’s not just about your looks—it’s the way you carry yourself with such confidence and grace that makes you truly mesmerizing.
+
+            I’m completely in awe of you.
+            
+            Your presence alone can brighten any space, and your energy is simply magnetic. The way you move, the way you smile, and the way you make others feel at ease—it’s all part of your undeniable charm.
+            
+            You don’t just turn heads; you leave lasting impressions. There’s something so effortlessly captivating about you that makes it impossible to look away.
+            
+            You are not just beautiful—you are a work of art, inside and out. 💕✨
+          </p>
+        </div>
+      </div>
+      <!--7th page-->
+      <div class="page">
+        <div class="front">
+          <h2>Grateful for You🌹❤</h2>
+          <p>
+            I just wanted to take a moment to let you know how much I appreciate you. From the very start, you’ve been someone truly special—someone I admire more than words can express.
+
+            Meeting you, even for a short time, has been a gift.
+            
+            Your kindness, your presence, and the way you make every conversation feel meaningful mean more to me than you know. I’m grateful that our paths crossed, and no matter what the future holds, I’ll always be thankful for you.
+            
+            Some people leave a mark on our hearts without even trying—and you are one of them. 💕
+          </p>
+        </div>
+        <div class="back">
+          <h2>Will You Be Mine? ❤️✨</h2>
+          <p>From the moment we started talking, you’ve been on my mind in the best way possible. Your kindness, your beauty, your energy—everything about you feels so special to me.
+
+            You make my world brighter, my days better, and my heart a little fuller.
+            
+            I don’t know what the future holds, but I do know one thing—I’d love to have you by my side. So, here’s my question, straight from the heart…
+            
+            Will you be mine? 💖💕 </p>
+        </div>
+      </div>
+
+      <div class="page">
+        <div class="front">
+          <img src="https://www.scribbler.com/cdn/shop/files/WEB367.jpg" alt="Img 1" />
+        </div>
+        <div class="back cover">
+          <h3>Cutest Queen</h3>
+          <p>
+            Content:By Rohan Pandey<br /><a
+              href=""
+              target="_blank"
+              rel="nofollow"></a>
+
+            <br />
+          </p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="emoji">❤️‍🔥</div>
+<div class="emoji">🫶🏻</div>
+<div class="emoji">❤️</div>
+<div class="emoji">😘</div>
+<div class="emoji">👨‍❤️‍💋‍👨</div>
+<div class="emoji">💓</div>
+<div class="emoji">❣️</div>
+<div class="emoji">💘</div>
+<div class="emoji">💖</div>
+<div class="emoji">💙</div>
+<div class="emoji">💚</div>
+<div class="emoji">🥰</div>
+<div class="emoji">💗</div>
+<div class="emoji">💖</div>
+<div class="emoji">😍</div>
+<div class="emoji">👌</div>
+
+<script>
+  const flipBook = (elBook) => {
+    elBook.style.setProperty("--c", 0); // Set current page
+    elBook.querySelectorAll(".page").forEach((page, idx) => {
+      page.style.setProperty("--i", idx);
+      page.addEventListener("click", (evt) => {
+        if (evt.target.closest("a")) return;
+        const curr = evt.target.closest(".back") ? idx : idx + 1;
+        elBook.style.setProperty("--c", curr);
+      });
+    });
+  };
+  
+  document.querySelectorAll(".book").forEach(flipBook);
+  
+</script>
+ 
+  </body>
+</html>
+
